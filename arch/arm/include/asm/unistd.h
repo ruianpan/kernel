@@ -403,6 +403,7 @@
 #define __NR_sendmmsg			(__NR_SYSCALL_BASE+374)
 #define __NR_setns			(__NR_SYSCALL_BASE+375)
 #define __NR_countrtthreads			(__NR_SYSCALL_BASE+376)
+#define __NR_listrtthreads			(__NR_SYSCALL_BASE+377)
 
 /*
  * The following SWIs are ARM private.

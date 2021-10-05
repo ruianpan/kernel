@@ -386,6 +386,7 @@
 		CALL(sys_sendmmsg)
 /* 375 */	CALL(sys_setns)
 /* 376 */	CALL(sys_count_rt_threads)
+/* 377 */	CALL(sys_list_rt_threads)
 #ifndef syscalls_counted
 .equ syscalls_padding, ((NR_syscalls + 3) & ~3) - NR_syscalls
 #define syscalls_counted

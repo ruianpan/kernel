@@ -5,6 +5,7 @@
 #include <linux/string.h>
 #include <linux/uaccess.h>
 #include <linux/slab.h>
+#include <linux/kernel.h>
 
 //TID, PID, real-time priority and name (command)
 
@@ -34,8 +35,8 @@ SYSCALL_DEFINE0(count_rt_threads){
   return count;
 }
 
-/*
-SYSCALL_DEFINE2(list_rt_threads, void __user * user_buf, int, count){
+
+SYSCALL_DEFINE2(list_rt_threads, void __user *, user_buf, int, count){
   int counter;
   rcu_read_lock();
   counter = 0;
@@ -44,14 +45,14 @@ SYSCALL_DEFINE2(list_rt_threads, void __user * user_buf, int, count){
   struct task_struct *p;
   for_each_process(p){
     if(counter >=count){
-      return counter;
+      continue;
     }
     unsigned int rt_priority = p->rt_priority;
     if(rt_priority >=1 &&rt_priority <=99){
-      local_data[count].pid = p->tgid;
-      local_data[count].tid = p->pid;
-      local_data[count].rt_priority = p->rt_priority;
-      strcpy(data_buf[count].comm, p->comm);
+      local_data[counter].pid = p->tgid;
+      local_data[counter].tid = p->pid;
+      local_data[counter].rt_priority = p->rt_priority;
+      strcpy(local_data[counter].comm, p->comm);
       counter++;
     }
   }
@@ -62,11 +63,4 @@ SYSCALL_DEFINE2(list_rt_threads, void __user * user_buf, int, count){
   return counter;
 
 
-
-
-
-
-
-
 }
-*/
